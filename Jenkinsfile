@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Clone repo') {
+        stage('Clone') {
             steps {
                 sh '''
                 pwd
@@ -16,7 +16,6 @@ pipeline {
             steps {
                 sh '''
                 cd ITSjavaPersonne-anne
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 mvn clean
                 mvn validate
                 mvn compile
@@ -31,6 +30,8 @@ pipeline {
         stage('Run') {
             steps {
                 sh '''
+                pwd
+                cd ITSjavaPersonne-anne
                 java -jar target/itsjavapersonne-0.1.jar
                 echo 'Project run'
                 '''
@@ -38,4 +39,3 @@ pipeline {
         }
     }
 }
-
